@@ -1,0 +1,46 @@
+═════════════════════════════════════════════════════════════════
+  MUTUAL FUND DATA PIPELINE — DATA QUALITY REPORT
+  Generated : 2026-06-23 05:40:07
+═════════════════════════════════════════════════════════════════
+
+SECTION 1 — DATASET SUMMARY
+---------------------------------------------
+  fund_master                ✅ Clean
+  nav_history                ✅ Clean
+  sip_transactions           ✅ Clean
+  portfolio_holdings         ✅ Clean
+  amc_data                   ✅ Clean
+  benchmark_index            ✅ Clean
+  category_returns           ✅ Clean
+  expense_ratio              ✅ Clean
+  aum_monthly                ✅ Clean
+  investor_profiles          ✅ Clean
+
+SECTION 2 — AMFI CODE VALIDATION
+---------------------------------------------
+  Total schemes in fund_master   : 18
+  Schemes with NAV history       : 6  (33.3% coverage)
+  Schemes missing NAV history    : 12
+  Orphan NAV records             : 0
+
+  Missing NAV — Remediation Plan:
+    [119517]  GET https://api.mfapi.in/mf/119517
+    [119775]  GET https://api.mfapi.in/mf/119775
+    [119840]  GET https://api.mfapi.in/mf/119840
+    [120293]  GET https://api.mfapi.in/mf/120293
+    [120465]  GET https://api.mfapi.in/mf/120465
+    [120714]  GET https://api.mfapi.in/mf/120714
+    [120837]  GET https://api.mfapi.in/mf/120837
+    [121314]  GET https://api.mfapi.in/mf/121314
+    [121456]  GET https://api.mfapi.in/mf/121456
+    [121832]  GET https://api.mfapi.in/mf/121832
+    [122001]  GET https://api.mfapi.in/mf/122001
+    [122105]  GET https://api.mfapi.in/mf/122105
+
+SECTION 3 — DAY 2 ACTION ITEMS
+---------------------------------------------
+  1. Extend live_nav_fetch.py to backfill all 18 scheme codes
+  2. Parse & merge nav_history with benchmark_index for CAGR calc
+  3. Build processed/nav_wide.csv (pivot: date × scheme_code)
+  4. Begin EDA notebook: return distributions, rolling volatility
+  5. Schema design for SQLite: schemes, nav, sip, portfolio tables

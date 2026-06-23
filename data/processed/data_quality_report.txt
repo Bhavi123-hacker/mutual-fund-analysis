@@ -1,0 +1,68 @@
+════════════════════════════════════════════════════════════════════
+  MUTUAL FUND DATA PIPELINE — DATA QUALITY REPORT
+  Source   : Bluestock Fintech Google Drive
+  Generated: 2026-06-23 11:50:59
+════════════════════════════════════════════════════════════════════
+
+SECTION 1 — DATASET OVERVIEW
+──────────────────────────────────────────────────
+  File                                Shape              Status
+──────────────────────────────────────────────────
+  01_fund_master                      (40, 15)           ✅ Clean
+  02_nav_history                      (46000, 3)         ⚠️  1 issue(s)
+  03_aum_by_fund_house                (90, 5)            ⚠️  1 issue(s)
+  04_monthly_sip_inflows              (48, 6)            ⚠️  2 issue(s)
+  05_category_inflows                 (144, 3)           ⚠️  1 issue(s)
+  06_industry_folio_count             (21, 6)            ⚠️  1 issue(s)
+  07_scheme_performance               (40, 19)           ⚠️  1 issue(s)
+  08_investor_transactions            (32778, 13)        ⚠️  1 issue(s)
+  09_portfolio_holdings               (322, 8)           ⚠️  1 issue(s)
+  10_benchmark_indices                (8050, 3)          ⚠️  1 issue(s)
+
+SECTION 2 — ANOMALY DETAILS
+──────────────────────────────────────────────────
+
+  02_nav_history:
+    └─ MISSING COLS: ['scheme_code']
+
+  03_aum_by_fund_house:
+    └─ MISSING COLS: ['aum_cr']
+
+  04_monthly_sip_inflows:
+    └─ MISSING COLS: ['sip_inflow_cr']
+    └─ NULL  'yoy_growth_pct': 12 missing (25.0%)
+
+  05_category_inflows:
+    └─ MISSING COLS: ['inflow_cr']
+
+  06_industry_folio_count:
+    └─ MISSING COLS: ['industry', 'folio_count']
+
+  07_scheme_performance:
+    └─ MISSING COLS: ['scheme_code', 'return_1m', 'return_3m', 'return_1y', 'return_3y', 'return_5y']
+
+  08_investor_transactions:
+    └─ MISSING COLS: ['transaction_id', 'scheme_code', 'date', 'amount']
+
+  09_portfolio_holdings:
+    └─ MISSING COLS: ['scheme_code']
+
+  10_benchmark_indices:
+    └─ MISSING COLS: ['value']
+
+SECTION 3 — AMFI CODE VALIDATION
+──────────────────────────────────────────────────
+  fund_master codes   : 40
+  nav_history codes   : 40
+  Coverage            : 100.0%
+  Missing NAV backfill: 0 schemes
+  Orphan NAV records  : 0
+
+SECTION 4 — DAY 2 ACTION ITEMS
+──────────────────────────────────────────────────
+  1. Backfill NAV history for schemes missing from nav_history
+  2. Merge fund_master ↔ nav_history on scheme code
+  3. Compute 1Y / 3Y / 5Y CAGR for all schemes
+  4. Build processed/nav_wide.xlsx (pivot: date × scheme_code)
+  5. EDA notebook: rolling returns, Sharpe ratio, drawdown
+  6. SQLite schema: schemes, nav, sip, portfolio tables
