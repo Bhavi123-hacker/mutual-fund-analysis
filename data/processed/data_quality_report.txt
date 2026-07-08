@@ -1,7 +1,7 @@
 ════════════════════════════════════════════════════════════════════
   MUTUAL FUND DATA PIPELINE — DATA QUALITY REPORT
   Source   : Bluestock Fintech Google Drive
-  Generated: 2026-06-23 11:50:59
+  Generated: 2026-07-07 19:38:53
 ════════════════════════════════════════════════════════════════════
 
 SECTION 1 — DATASET OVERVIEW

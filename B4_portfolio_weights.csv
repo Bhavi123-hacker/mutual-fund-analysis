@@ -1,0 +1,4 @@
+portfolio,annual_return_%,annual_std_%,sharpe_ratio,w_ICICI Pru Bluechip F,w_Nippon India Large C,w_SBI Small Cap Fund -,w_Nippon India ETF Nif,w_HDFC Mid-Cap Opportu
+max_sharpe,19.033,8.437,1.4854,26.71,29.21,0.0,42.28,1.81
+min_variance,16.131,7.465,1.2903,28.75,32.87,8.74,28.71,0.93
+equal,83.781,149.697,0.5162,20.0,20.0,20.0,20.0,20.0
