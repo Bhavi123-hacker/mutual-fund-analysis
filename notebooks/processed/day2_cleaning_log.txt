@@ -1,0 +1,67 @@
+
+════════════════════════════════════════════════════════════════════
+  TASK 1 — CLEANING 02_nav_history.xlsx
+════════════════════════════════════════════════════════════════════
+  Raw rows loaded            : 46,000
+  ⚠ Invalid NAV (<=0) flagged : 0  → set to NaN for ffill
+  ⚠ Duplicate (code,date) rows removed: 0
+  ✓ Sorted by amfi_code + date
+  ✓ Forward-filled rows added (weekends/holidays): 18,320
+  ✓ Final validation — NAV > 0 everywhere: True
+
+  Raw rows   → 46,000
+  Clean rows → 64,320  (dedup -0, bad-date -0, ffill +18,320)
+  Saved → C:\Users\Dell\mf_analysis\data\processed\02_nav_history_clean.xlsx
+
+════════════════════════════════════════════════════════════════════
+  TASK 2 — CLEANING 08_investor_transactions.xlsx
+════════════════════════════════════════════════════════════════════
+  Raw rows loaded            : 32,778
+  ⚠ Unmappable transaction_type values dropped: 0  []
+  ⚠ Rows dropped — amount <= 0: 0
+  ⚠ Rows dropped — unparseable date: 0
+
+  Raw rows   → 32,778
+  Clean rows → 32,778
+  transaction_type distribution:
+transaction_type
+SIP           19716
+Lumpsum        8095
+Redemption     4967
+  kyc_status distribution:
+kyc_status
+Verified    30146
+Pending      2632
+  Saved → C:\Users\Dell\mf_analysis\data\processed\08_investor_transactions_clean.xlsx
+
+════════════════════════════════════════════════════════════════════
+  TASK 3 — CLEANING 07_scheme_performance.xlsx
+════════════════════════════════════════════════════════════════════
+  Raw rows loaded            : 40
+
+  Raw rows   → 40
+  Clean rows → 40  (no rows dropped — invalid cells nulled & flagged, not deleted)
+  Outlier-flagged rows → 0
+  Saved → C:\Users\Dell\mf_analysis\data\processed\07_scheme_performance_clean.xlsx
+
+════════════════════════════════════════════════════════════════════
+  LIGHT CLEAN — datasets 01, 03, 04, 05, 06, 09, 10
+════════════════════════════════════════════════════════════════════
+  (standard pass: date parsing, dedup, negative-value flagging)
+
+  01_fund_master                   40 →     40 rows  (dupes removed: 0)
+  03_aum_by_fund_house             90 →     90 rows  (dupes removed: 0)
+  04_monthly_sip_inflows           48 →     48 rows  (dupes removed: 0)
+  05_category_inflows             144 →    144 rows  (dupes removed: 0)
+  06_industry_folio_count          21 →     21 rows  (dupes removed: 0)
+  09_portfolio_holdings           322 →    322 rows  (dupes removed: 0)
+  10_benchmark_indices          8,050 →  8,050 rows  (dupes removed: 0)
+
+════════════════════════════════════════════════════════════════════
+  SUMMARY
+════════════════════════════════════════════════════════════════════
+  02_nav_history_clean.xlsx          : (64320, 4)
+  08_investor_transactions_clean.xlsx: (32778, 14)
+  07_scheme_performance_clean.xlsx   : (40, 21)
+  + 7 lightly-cleaned passthrough datasets (see above)
+  = 10 / 10 cleaned XLSX files in data/processed/
